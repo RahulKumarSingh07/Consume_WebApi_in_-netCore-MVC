@@ -1,0 +1,108 @@
+﻿@model First.Models.ViewModel.EmployeeViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h4>Edit Employee</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="UpdateEmployee">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input type="hidden" asp-for="Id" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Name</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="form-check-label" asp-for="Gender">Gender</label>
+                <div class="form-check">
+                    <input asp-for="Gender" class="form-check-input" type="radio" value="Male">
+                    <label class="form-check-label" asp-for="Gender"> Male</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input class="form-check-input" type="radio" asp-for="Gender" value="Female">
+                    <label class="form-check-label" asp-for="Gender">Female</label>
+                </div>
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QualificationId" class="control-label">Qualification</label>
+                <select class="form-control dept" asp-for="QualificationId">
+                    <option value="">--SELECT--</option>
+                </select>
+                <span asp-validation-for="QualificationId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label">Address</label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="City" class="control-label">City</label>
+                <select class="form-control" asp-for="City">
+                    <option>Select</option>
+                    <option value="Delhi">Delhi</option>
+                    <option value="Patna">Patna</option>
+                    <option value="Mumbai">Mumbai</option>
+                </select>
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IsActive" class="control-label">Choose One</label>
+                <select id="pk" class="form-control" asp-for="IsActive">
+                    <option>Select</option>
+                    <option value="true">Active</option>
+                    <option value="false">InActive</option>
+                </select>
+                <span asp-validation-for="IsActive" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-primary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    var sPageURL = window.location.search.substring(1);
+    var sURLVariables = sPageURL.split('=');
+    alert(sURLVariables);
+    var id = sURLVariables[1];
+    alert(id);
+    $.get('@Url.Action("GetEmployeeById", "Employee")', { "id": id },
+        function
+            (data) {
+
+           // console.log(data);
+            $('input[name="Id"]').val(data.id);
+            $('input[name="Name"]').val(data.name);
+            var a = data.gender;
+            var $radios = $('input:radio[name=Gender]');
+            if ($radios.is(':checked') === false) {
+                $radios.filter('[value='+a+']').prop('checked', true);
+            }
+
+            $('select[name="Qualification"]').val(data.qua);
+            $('input[name="Address"]').val(data.address);
+            $('select[name="City"]').val(data.city);
+            var tf = data.isActive;
+            var bb = $('#pk option[value=' + tf + ']').prop('selected', true);
+        });
+
+     $(document).ready(function () {
+
+        $.get('@Url.Action("GetQualifications","Employee")',
+            function (result) {
+                console.log(result);
+                $.each(result, function (i, dept) {
+                    $(".dept").append("<option value=" + dept.id
+                        + ">" + dept.name + "</option>")
+                })
+            })
+    });
+
+</script>

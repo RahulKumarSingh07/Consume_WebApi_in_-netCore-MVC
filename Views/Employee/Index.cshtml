@@ -1,0 +1,77 @@
+﻿@{ ViewData["Title"] = "Employee List"; }
+
+<div class="text-center">
+    <h2 class="h2">Employee Details</h2>
+    <hr />
+</div>
+<a class="btn btn-outline-info" asp-controller="Employee" asp-action="Create"><i class="bi bi-plus"></i>Add New</a>
+<br />
+<br />
+<table id="emptable" class="table table-bordered table-striped text-center">
+    <thead>
+        <tr>
+            <th>Emp_ID</th>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Qualification</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>Active</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+</table>
+
+<script>
+
+    $(document).ready(function () {
+        LoadEmployee();
+    });
+    function LoadEmployee() {
+
+        $.get('@Url.Action("GetEmployee", "Employee")', function (result) {
+
+           // console.log(result);
+
+            $("#emptable").DataTable({
+
+                data: result,
+                columns: [
+
+                    { "data": "id" },
+                    { "data": "name" },
+                    { "data": "gender" },
+                    { "data": "qualificationName" },
+                    { "data": "address" },
+                    { "data": "city" },
+                    { "data": "isActive" },
+                    {
+                        "data": "id", render: function (id) {
+                            return `<div><a href="Employee/UpdateEmployee/?id=${id}"><i  class="fa fa-eye"></i></a> | <a href="#" onclick="DeleteRecord(${id})"> <i class="fa fa-trash"></i></a></div>`
+
+                        }
+                    }
+
+                ]
+
+            });
+        });
+    }
+
+    function DeleteRecord(id) {
+        if (confirm("Are Your Sure You want to Delete this message")) {
+            $.post('@Url.Action("DeleteEmployee", "Employee")', { "id": id }, function (result) {
+                if (result.ok == true) {
+                    $("#emptable").DataTable().destroy();
+                    LoadEmployee();
+                    alert(result.message);
+                }
+                else {
+                    alert(result.message);
+                }
+            });
+
+        }
+    }
+</script>
