@@ -15,5 +15,8 @@ namespace First.Repo.Contract
         bool DeleteEmployee(int id);
         Employee UpdateEmployee(EmployeeViewModel employee);
         Employee GetEmployeeById(int id);
+        List<Country> GetCountry();
+     
+
     }
 }

@@ -13,5 +13,7 @@ namespace First.DATABASE
         
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Qualification> Qualifications { get; set; }
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<State> States { get; set; }
     }
 }

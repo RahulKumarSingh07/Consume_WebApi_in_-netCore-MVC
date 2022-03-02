@@ -19,9 +19,11 @@ namespace First.Models
         [Required]
         public string Address { get; set; }
         [Required]
-        public string City { get; set; }
-        [Required]
         public bool IsActive { get; set; }
-       
+        [Required]
+        public Country Country { get; set; }
+        [Required]
+        public State State { get; set; }
+
     }
 }

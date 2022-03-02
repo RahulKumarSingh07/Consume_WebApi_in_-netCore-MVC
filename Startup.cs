@@ -17,9 +17,13 @@ namespace First
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private IConfigurationRoot _config;
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            var ConfigBuilder = new ConfigurationBuilder().SetBasePath(env.ContentRootPath)
+                        .AddJsonFile("appsettings.json");
+            _config = ConfigBuilder.Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -27,6 +31,7 @@ namespace First
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton(_config);
             services.AddControllersWithViews();
             services.AddDbContext<Databasefile>(options => { options.UseSqlServer(Configuration.GetConnectionString("Connection")); });
             services.AddTransient<IEmployee, EmployeeService>();

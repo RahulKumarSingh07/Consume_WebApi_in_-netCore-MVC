@@ -15,7 +15,8 @@
             <th>Gender</th>
             <th>Qualification</th>
             <th>Address</th>
-            <th>City</th>
+            <th>Country</th>
+            <th>State</th>
             <th>Active</th>
             <th>Action</th>
         </tr>
@@ -32,7 +33,7 @@
 
         $.get('@Url.Action("GetEmployee", "Employee")', function (result) {
 
-           // console.log(result);
+           console.log(result);
 
             $("#emptable").DataTable({
 
@@ -44,7 +45,8 @@
                     { "data": "gender" },
                     { "data": "qualificationName" },
                     { "data": "address" },
-                    { "data": "city" },
+                    { "data": "countryName" },
+                    { "data": "stateName" },
                     { "data": "isActive" },
                     {
                         "data": "id", render: function (id) {

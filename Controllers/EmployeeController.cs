@@ -14,7 +14,7 @@ namespace First.Controllers
     {
         private readonly IEmployee EmployeeService;
         private readonly Databasefile _Conn;
-        public EmployeeController(IEmployee employee,Databasefile Conn) { EmployeeService = employee; _Conn = Conn; }
+        public EmployeeController(IEmployee employee, Databasefile Conn) { EmployeeService = employee; _Conn = Conn; }
         public IActionResult Index()
         {
             return View();
@@ -33,6 +33,8 @@ namespace First.Controllers
         {
             var Query = (from E in _Conn.Employees
                          join Q in _Conn.Qualifications on E.Qf.Id equals Q.Id
+                         join C in _Conn.Countries on E.Country.C_Id equals C.C_Id
+                         join S in _Conn.States on E.State.S_Id equals S.S_Id
                          select new EmployeeViewModel
                          {
                              Id = E.Id,
@@ -40,7 +42,8 @@ namespace First.Controllers
                              Gender = E.Gender,
                              QualificationName = Q.Name,
                              Address = E.Address,
-                             City = E.City,
+                             CountryName=C.CountryName,
+                             StateName = S.StateName,
                              IsActive = E.IsActive
                          }).ToList();
             return Json(Query);
@@ -49,6 +52,16 @@ namespace First.Controllers
         {
             var quali = EmployeeService.GetQualifications();
             return Json(quali);
+        }
+        public IActionResult GetCountry()
+        {
+            var quali1 = EmployeeService.GetCountry();
+            return Json(quali1);
+        }
+        public JsonResult GetState(int id)
+        {
+            var statebind = _Conn.States.Where(x => x.GetCountry.C_Id == id).ToList();
+            return Json(statebind);
         }
         [HttpPost]
         public IActionResult DeleteEmployee(int id)
