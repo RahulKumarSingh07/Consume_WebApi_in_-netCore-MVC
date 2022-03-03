@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Create";
 }
- 
+
 <h4>Edit Employee</h4>
 <hr />
 <div class="row">
@@ -70,68 +70,3 @@
         </form>
     </div>
 </div>
-
-<script>
-    @*var sPageURL = window.location.search.substring(1);
-    var sURLVariables = sPageURL.split('=');
-   // alert(sURLVariables);
-    var id = sURLVariables[1];
-   // alert(id);
-    $.get('@Url.Action("GetEmployeeById", "Employee")', { "id": id },
-        function
-            (data) {
-
-           // console.log(data);
-            $('input[name="Id"]').val(data.id);
-            $('input[name="Name"]').val(data.name);
-            var a = data.gender;
-            var $radios = $('input:radio[name=Gender]');
-            if ($radios.is(':checked') === false) {
-                $radios.filter('[value='+a+']').prop('checked', true);
-            }
-
-            $('select[name="Qualification"]').val(data.qualificationName);
-            $('select[name="Country"]').val(data.countryName);
-            $('select[name="State"]').val(data.stateName);
-            $('input[name="Address"]').val(data.address);
-          /*  $('select[name="City"]').val(data.city);*/
-            var tf = data.isActive;
-            var bb = $('#pk option[value=' + tf + ']').prop('selected', true);
-        });*@
-
-    $(document).ready(function () {
-        $.get('@Url.Action("GetQualifications","Employee")',
-            function (result) {
-                // console.log(result);
-                $.each(result, function (i, dept) {
-                    $(".dept").append("<option value=" + dept.id
-                        + ">" + dept.name + "</option>")
-                })
-            });
-
-         $.get('@Url.Action("GetCountry","Employee")',
-            function (result) {
-                //console.log(result);
-                $.each(result, function (i, cs) {
-                    $(".cs").append("<option value=" + cs.c_Id
-                        + ">" + cs.countryName + "</option>")
-                })
-            });
-    });
-     $(document).ready(function () {
-        $(".cs").change(function () {
-            var C_Id = $(".cs").val();
-            $(".sid").empty();
-            $.get('@Url.Action("GetState","Employee")', { "id": C_Id },
-                function (data) {
-                    console.log(data);
-                    $.each(data, function (i, sname) {
-                        $(".sid").append("<option value=" +sname.s_Id
-                            + ">" + sname.stateName + "</option>")
-                    })
-
-                });
-        });
-    });
-
-</script>

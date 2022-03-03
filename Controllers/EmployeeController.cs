@@ -42,7 +42,7 @@ namespace First.Controllers
                              Gender = E.Gender,
                              QualificationName = Q.Name,
                              Address = E.Address,
-                             CountryName=C.CountryName,
+                             CountryName = C.CountryName,
                              StateName = S.StateName,
                              IsActive = E.IsActive
                          }).ToList();
@@ -78,16 +78,35 @@ namespace First.Controllers
                 return Json(new { ok = false, message = "Employee Not Found.." });
             }
         }
-        public IActionResult UpdateEmployee()
-        {
-            return View();
-        }
+
+        //public IActionResult UpdateEmployee()
+        //{
+        //    return View();
+        //}
+
+        //[HttpGet]
+        //public IActionResult GetEmployeeById(int id)
+        //{
+        //    var emp1 = EmployeeService.GetEmployeeById(id);
+        //    return RedirectToAction("UpdateEmployee",emp1);
+        //}
+
         [HttpGet]
-        public IActionResult GetEmployeeById(int id)
+        public IActionResult UpdateEmployee(int id)
         {
-            var emp1 = EmployeeService.GetEmployeeById(id);
-            return Json(emp1);
+            var empDetails = EmployeeService.GetEmployeeById(id);
+            var empModel = new EmployeeViewModel();
+            empModel.Id = empDetails.Id;
+            empModel.Name = empDetails.Name;
+            empModel.Gender = empDetails.Gender;
+            empModel.Address = empDetails.Address;
+          //  empModel.QualificationName = empDetails.Qf.Name;
+           // empModel.CountryName = empDetails.Country.CountryName;
+          //  empModel.StateName = empDetails.State.StateName;
+            empModel.IsActive = empDetails.IsActive;
+            return View(empModel);
         }
+
         [HttpPost]
         public IActionResult UpdateEmployee(EmployeeViewModel model)
         {
