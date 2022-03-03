@@ -58,7 +58,7 @@ namespace First.Controllers
             var quali1 = EmployeeService.GetCountry();
             return Json(quali1);
         }
-        public JsonResult GetState(int id)
+        public IActionResult GetState(int id)
         {
             var statebind = _Conn.States.Where(x => x.GetCountry.C_Id == id).ToList();
             return Json(statebind);

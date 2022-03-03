@@ -42,7 +42,17 @@
 
                     { "data": "id" },
                     { "data": "name" },
-                    { "data": "gender" },
+                    {
+                        "data": "gender", render: function (value) {
+                           // debugger;
+                            if (value == "Female") {
+                                return '<div style="color:red">Female</div>';
+                            } else {
+                                return "Male";
+                            }
+                        }
+                    },
+
                     { "data": "qualificationName" },
                     { "data": "address" },
                     { "data": "countryName" },
@@ -51,10 +61,8 @@
                     {
                         "data": "id", render: function (id) {
                             return `<div><a href="Employee/UpdateEmployee/?id=${id}"><i  class="fa fa-eye"></i></a> | <a href="#" onclick="DeleteRecord(${id})"> <i class="fa fa-trash"></i></a></div>`
-
                         }
                     }
-
                 ]
 
             });

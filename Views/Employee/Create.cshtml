@@ -46,7 +46,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="CountryID" class="control-label">Country</label>
-                <select class="form-control cs" asp-for="CountryID" >
+                <select class="form-control cs" asp-for="CountryID">
                     <option value="">--Select--</option>
                 </select>
                 <span asp-validation-for="CountryID" class="text-danger"></span>
@@ -54,7 +54,7 @@
             <div class="form-group">
                 <label asp-for="StateID" class="control-label">State</label>
                 <select class="form-control sid" asp-for="StateID">
-                    <option>Select</option>
+                    <option value="">--Select--</option>
                 </select>
                 <span asp-validation-for="StateID" class="text-danger"></span>
             </div>
@@ -96,31 +96,22 @@ $(document).ready(function () {
             });
 
    //State Bind
-
-    
-    var getstateId = function () {
-        $ajax({
-            url: '@Url.Action("GetState","Employee")',
-            type: 'GET',
-            data: {
-                cid: $('.cs').val(),
-            },
-            success: function (data) {
-                $('.sid').find('option').remove()
-                $(data).each(
-                    function (index, item) {
-                        $('#sid').append("<option value=" + item.s_Id
-                            + ">" + items.stateName + "</option>")
-                    });
-            }
-        });
-    };
-
-    //console.log(getstateId)
-    $(".cs").change(function () {
-        getstateId();
-    });
 });
+    $(document).ready(function () {
+        $(".cs").change(function () {  
+            var C_Id = $(".cs").val();
+            $(".sid").empty();
+            $.get('@Url.Action("GetState","Employee")', { "id": C_Id },
+                function (data) {
+                    $.each(data, function (i, sname) {
+                        $(".sid").append("<option value=" +sname.s_Id
+                            + ">" + sname.stateName + "</option>")
+                    })
+                   
+                });
+        });
+    });
+
 
 
 </script>
