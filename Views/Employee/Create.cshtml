@@ -69,7 +69,6 @@
             </div>
             <div class="form-group">
                 <input type="submit" value="Submit" class="btn btn-primary" />
-                <input type="submit" value="Edit" class="btn btn-primary" />
                 <a asp-action="Index" class="btn btn-primary">Back to List</a>
             </div>
         </form>
@@ -77,7 +76,7 @@
 </div>
 <script>
 $(document).ready(function () {
-    //qualificatonBind
+  //qualificatonBind
     $.get('@Url.Action("GetQualifications","Employee")',
             function (result) {
                 // console.log(result);
@@ -90,7 +89,7 @@ $(document).ready(function () {
         $.get('@Url.Action("GetCountry","Employee")',
             function (result) {
                 //console.log(result);
-                $.each(result, function (i, cs) {
+                  $.each(result, function (i, cs) {
                     $(".cs").append("<option value=" + cs.c_Id
                         + ">" + cs.countryName + "</option>")
                 })
@@ -99,7 +98,7 @@ $(document).ready(function () {
    //State Bind
 });
     $(document).ready(function () {
-        $(".cs").change(function () {  
+        $(".cs").change(function () {
             var C_Id = $(".cs").val();
             $(".sid").empty();
             $.get('@Url.Action("GetState","Employee")', { "id": C_Id },
@@ -108,7 +107,7 @@ $(document).ready(function () {
                         $(".sid").append("<option value=" +sname.s_Id
                             + ">" + sname.stateName + "</option>")
                     })
-                   
+
                 });
         });
     });

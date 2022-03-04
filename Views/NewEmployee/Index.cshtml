@@ -1,0 +1,42 @@
+﻿@model IEnumerable<First.Models.ViewModel.CommonModel>
+
+@{ ViewData["Title"] = "New Employee List"; }
+
+<div class="text-center">
+    <h2 class="h2"><b>Employee Details</b></h2>
+    <hr />
+</div>
+<a class="btn btn-outline-info" asp-controller="NewEmployee" asp-action="Create"><i class="bi bi-plus"></i>Add New</a>
+<br />
+<br />
+<table id="emptable" class="table table-bordered table-striped text-center">
+    <thead>
+        <tr>
+            <th>Emp_ID</th>
+            <th>Name</th>
+            <th>Degisnation</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Website</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var data in Model)
+        {
+        <tr>
+            <td>@data.Empid</td>
+            <td>@data.Name</td>
+            <td>@data.Degisnation</td>
+            <td>@data.Address</td>
+            <td>@data.City</td>
+            <td>@data.State</td>
+            <td>@data.Website</td>
+            <td>
+                <a asp-action="Update" asp-route-id="@data.Empid"><i class="fa fa-pencil-square"></i></a><b>||</b><a asp-action="Details" asp-route-id="@data.Empid"><i class="fa fa-eye"></i></a><b>||</b><a asp-action="Delete" asp-route-id="@data.Empid"><i class="fa fa-trash"></i></a>
+            </td>
+        </tr>
+        }
+        </tbody>
+</table>

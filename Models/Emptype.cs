@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace First.Models
 {
-    public class Country
+    public class Emptype
     {
         [Key]
         [Required]
-        public int C_Id { get; set; }
+        public int Tid { get; set; }
         [Required]
-        public string CountryName { get; set; }
+        public string Types { get; set; }
     }
 }

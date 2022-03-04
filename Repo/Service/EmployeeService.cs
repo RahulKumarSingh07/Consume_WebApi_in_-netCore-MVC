@@ -10,7 +10,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace First.Repo.Service
 {
-   
+
     public class EmployeeService : IEmployee
     {
         private readonly Databasefile _Conn;
@@ -26,10 +26,11 @@ namespace First.Repo.Service
 
         public Employee CreateEmployee(EmployeeViewModel model)
         {
-            var bind = _Conn.Qualifications.SingleOrDefault(x=>x.Id==model.QualificationId);
+            var bind = _Conn.Qualifications.SingleOrDefault(x => x.Id == model.QualificationId);
             var bind2 = _Conn.Countries.SingleOrDefault(x => x.C_Id == model.CountryID);
             var bind3 = _Conn.States.SingleOrDefault(x => x.S_Id == model.StateID);
-            var employee = new Employee {
+            var employee = new Employee
+            {
                 Name = model.Name,
                 Gender = model.Gender,
                 Qf = bind,
@@ -51,11 +52,11 @@ namespace First.Repo.Service
         {
             return _Conn.Countries.ToList();
         }
-       
+
 
         public bool DeleteEmployee(int id)
         {
-            var emp = _Conn.Employees.SingleOrDefault(x=> x.Id==id);
+            var emp = _Conn.Employees.SingleOrDefault(x => x.Id == id);
             if (emp != null)
             {
                 _Conn.Employees.Remove(emp);

@@ -16,7 +16,7 @@ namespace First.Controllers
         private readonly Databasefile _Conn;
         public EmployeeController(IEmployee employee, Databasefile Conn) { EmployeeService = employee; _Conn = Conn; }
         public IActionResult Index()
-        {
+        { 
             return View();
         }
         public IActionResult Create()

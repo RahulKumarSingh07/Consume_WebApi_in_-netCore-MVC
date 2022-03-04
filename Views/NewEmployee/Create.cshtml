@@ -1,0 +1,92 @@
+﻿@model First.Models.ViewModel.CommonModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Employee</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Name</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Did" class="control-label">Degisnation</label>
+                <select class="form-control dept" asp-for="Did" asp-items="@(new SelectList(ViewBag.ListofDegis,"Value", "Text"))">
+                </select>
+                <span asp-validation-for="Did" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Etypeid" class="control-label">Employee_Type</label>
+                <select class="form-control dept" asp-for="Etypeid" asp-items="@(new SelectList(ViewBag.Listoftype,"Value", "Text"))">
+                </select>
+                <span asp-validation-for="Etypeid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Salary" class="control-label">Salary</label>
+                <input asp-for="Salary" class="form-control" />
+                <span asp-validation-for="Salary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Bonus" class="control-label"></label>
+                <input asp-for="Bonus" class="form-control" />
+                <span asp-validation-for="Bonus" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label class="control-label">Location</label>
+                <input class="form-control" id="location" />
+            </div>*@
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <textarea asp-for="Address" class="form-control" id="address"></textarea>
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="City" class="control-label"></label>
+                <input asp-for="City" class="form-control" id="city" />
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="State" class="control-label"></label>
+                <input asp-for="State" class="form-control" id="state" />
+                <span asp-validation-for="State" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pincode" class="control-label"></label>
+                <input type="number" asp-for="Pincode" class="form-control" id="pin" />
+                <span asp-validation-for="Pincode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Website" class="control-label"></label>
+                <input asp-for="Website" class="form-control" id="web" />
+                <span asp-validation-for="Website" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-danger">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+@*<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&key=AIzaSyAYVnC7FGfrTTz4KC5HYCMGmLdnU_JUM_4"></script>
+<script>
+    google.maps.event.addDomListener(window, 'load', function () {
+    var places = new google.maps.places.Autocomplete(document.getElementById('location'));
+    google.maps.event.addListener(places, 'place_changed', function () {
+        var place = places.getPlace();
+        document.getElementById('address').value = place.formatted_address;
+        document.getElementById('state').value = place.geometry.location.lat();
+        document.getElementById('city').value = place.geometry.location.lng();
+        document.getElementById('pin').value = place.geometry.location.lng();
+    });
+});
+</script>*@
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
