@@ -17,6 +17,7 @@ namespace First.Controllers
         public EmployeeController(IEmployee employee, Databasefile Conn) { EmployeeService = employee; _Conn = Conn; }
         public IActionResult Index()
         { 
+
             return View();
         }
         public IActionResult Create()
@@ -26,6 +27,7 @@ namespace First.Controllers
         [HttpPost]
         public IActionResult CreateEmployee(EmployeeViewModel model)
         {
+
             var result = EmployeeService.CreateEmployee(model);
             return RedirectToAction("Index");
         }

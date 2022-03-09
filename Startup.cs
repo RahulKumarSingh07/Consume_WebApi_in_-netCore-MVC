@@ -12,29 +12,31 @@ using Microsoft.EntityFrameworkCore;
 using First.DATABASE;
 using First.Repo.Contract;
 using First.Repo.Service;
+using First.API.Repo.Contract;
+using First.API.Repo.Services;
 
 namespace First
 {
     public class Startup
     {
-        private IConfigurationRoot _config;
-        public Startup(IConfiguration configuration, IWebHostEnvironment env)
+       
+        public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            var ConfigBuilder = new ConfigurationBuilder().SetBasePath(env.ContentRootPath)
-                        .AddJsonFile("appsettings.json");
-            _config = ConfigBuilder.Build();
         }
 
         public IConfiguration Configuration { get; }
 
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton(_config);
+
             services.AddControllersWithViews();
+            services.AddControllers();
             services.AddDbContext<Databasefile>(options => { options.UseSqlServer(Configuration.GetConnectionString("Connection")); });
             services.AddTransient<IEmployee, EmployeeService>();
+            services.AddScoped<IStudent, studentServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

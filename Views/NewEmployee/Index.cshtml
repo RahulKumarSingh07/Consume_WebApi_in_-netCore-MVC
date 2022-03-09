@@ -25,18 +25,18 @@
     <tbody>
         @foreach (var data in Model)
         {
-        <tr>
-            <td>@data.Empid</td>
-            <td>@data.Name</td>
-            <td>@data.Degisnation</td>
-            <td>@data.Address</td>
-            <td>@data.City</td>
-            <td>@data.State</td>
-            <td>@data.Website</td>
-            <td>
-                <a asp-action="Update" asp-route-id="@data.Empid"><i class="fa fa-pencil-square"></i></a><b>||</b><a asp-action="Details" asp-route-id="@data.Empid"><i class="fa fa-eye"></i></a><b>||</b><a asp-action="Delete" asp-route-id="@data.Empid"><i class="fa fa-trash"></i></a>
-            </td>
-        </tr>
+            <tr>
+                <td>@data.Empid</td>
+                <td>@data.Name</td>
+                <td>@data.Degisnation</td>
+                <td>@data.Address</td>
+                <td>@data.City</td>
+                <td>@data.State</td>
+                <td>@data.Website</td>
+                <td>
+                    <a asp-action="Update" asp-route-id="@data.Empid"><i class="fa fa-pencil-square"></i></a><b>||</b><a asp-action="DeleteEmp" asp-route-id="@data.Empid" onclick="return confirm('You Want To Delete This Messege')"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
         }
-        </tbody>
+    </tbody>
 </table>

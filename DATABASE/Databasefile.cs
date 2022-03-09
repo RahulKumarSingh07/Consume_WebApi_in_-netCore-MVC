@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using First.Models;
+using First.API.Models;
 
 namespace First.DATABASE
 {
@@ -19,6 +20,8 @@ namespace First.DATABASE
         public DbSet<EmployeeNew> NewEmployees { get; set; }
         public DbSet<Emptype> Emptypes { get; set; }
         public DbSet<Designation> Designations_Col  { get; set; }
+
+        public DbSet<Student> students { get; set; }
 
     }
 }

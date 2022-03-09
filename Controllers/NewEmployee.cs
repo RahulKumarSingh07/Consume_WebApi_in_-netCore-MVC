@@ -27,14 +27,14 @@ namespace First.Controllers
                               Empid = E.Empid,
                               Name = E.Name,
                               Degisnation = D.Designations,
-                              Salary=E.salary,
-                              Bonus=E.Bonus,
-                              Emptype=Ep.Types,
-                              City=E.City,
-                              State=E.State,
-                              Pincode=E.Pincode,
-                              Website=E.Website,
-                              Address=E.Address
+                              Salary = E.salary,
+                              Bonus = E.Bonus,
+                              Emptype = Ep.Types,
+                              City = E.City,
+                              State = E.State,
+                              Pincode = E.Pincode,
+                              Website = E.Website,
+                              Address = E.Address
                           }).ToList();
             return View(getemp);
         }
@@ -120,9 +120,9 @@ namespace First.Controllers
             employee.Empid = emp.Empid;
             employee.Name = emp.Name;
             employee.Salary = emp.salary;
-       //     employee.Degisnation = emp.Degisnation.Designations;
+            //     employee.Degisnation = emp.Degisnation.Designations;
             employee.Bonus = emp.Bonus;
-         //   employee.Emptype = emp.Emptype.Types;
+            //   employee.Emptype = emp.Emptype.Types;
             employee.City = emp.City;
             employee.State = emp.State;
             employee.Pincode = emp.Pincode;
@@ -133,7 +133,7 @@ namespace First.Controllers
         [HttpPost]
         public IActionResult Update(CommonModel employee)
         {
-            if(employee == null)
+            if (employee == null)
             {
                 return NotFound();
             }
@@ -144,7 +144,7 @@ namespace First.Controllers
                 var emp2 = _context.NewEmployees.SingleOrDefault(e => e.Empid == employee.Empid);
                 emp2.Name = employee.Name;
                 emp2.salary = employee.Salary;
-                emp2.Degisnation =degs;
+                emp2.Degisnation = degs;
                 emp2.Bonus = employee.Bonus;
                 emp2.Emptype = emtype;
                 emp2.City = employee.City;
@@ -157,7 +157,38 @@ namespace First.Controllers
                 return RedirectToAction("Index");
             }
         }
-
+        public IActionResult DeleteEmp(int? id)
+        {
+            if (id != null)
+            {
+                var delemp = _context.NewEmployees.SingleOrDefault(x => x.Empid == id);
+                _context.NewEmployees.Remove(delemp);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return NotFound();
+        }
+        public IActionResult viewEmp(int? id)
+        {
+            var getemp = (from E in _context.NewEmployees
+                          join D in _context.Designations_Col on E.Degisnation.Did equals D.Did
+                          join Ep in _context.Emptypes on E.Emptype.Tid equals Ep.Tid
+                          select new CommonModel
+                          {
+                              Empid = E.Empid,
+                              Name = E.Name,
+                              Degisnation = D.Designations,
+                              Salary = E.salary,
+                              Bonus = E.Bonus,
+                              Emptype = Ep.Types,
+                              City = E.City,
+                              State = E.State,
+                              Pincode = E.Pincode,
+                              Website = E.Website,
+                              Address = E.Address
+                          }).ToList();
+            return View(getemp);
+        }
+     
     }
-
 }
