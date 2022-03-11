@@ -11,8 +11,8 @@ namespace First.API.Repo.Contract
     {
         List<Student> GetStudents();
         Student CreateStudent(Student model);
-        bool  DeleteEmployee(int id);
+        bool DeleteStudent(int id);
         Student UpdateStudent(Student model);
-        Student GetEmployeeById(int id);
+      //  Student GetStudentById(int id);
     }
 }

@@ -36,7 +36,7 @@ namespace First
             services.AddControllers();
             services.AddDbContext<Databasefile>(options => { options.UseSqlServer(Configuration.GetConnectionString("Connection")); });
             services.AddTransient<IEmployee, EmployeeService>();
-            services.AddScoped<IStudent, studentServices>();
+            services.AddScoped<IStudent,studentServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,9 +61,11 @@ namespace First
 
             app.UseEndpoints(endpoints =>
             {
+               
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllers();
             });
         }
     }

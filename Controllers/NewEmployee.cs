@@ -19,6 +19,7 @@ namespace First.Controllers
         }
         public IActionResult Index()
         {
+          
             var getemp = (from E in _context.NewEmployees
                           join D in _context.Designations_Col on E.Degisnation.Did equals D.Did
                           join Ep in _context.Emptypes on E.Emptype.Tid equals Ep.Tid

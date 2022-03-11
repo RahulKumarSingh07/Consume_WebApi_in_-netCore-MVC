@@ -14,7 +14,9 @@ namespace First.Models
         [Required]
         public string Name { get; set; }
         [Required]
+
         public Designation Degisnation { get; set; }
+        
         [Required]
         public int salary { get; set; }
         [Required]
@@ -32,6 +34,7 @@ namespace First.Models
         [Required]
         public string Website { get; set; }
 
-
+        //Navigational Property
+        //public virtual Designation Degisnation { get; set; }
     }
 }

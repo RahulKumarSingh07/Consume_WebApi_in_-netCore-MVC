@@ -1,0 +1,35 @@
+﻿@model IEnumerable<First.API.Models.Student>
+    <div class="text-center">
+        <h2 class="h2"><b>Employee Details</b></h2>
+        <hr />
+    </div>
+    <a class="btn btn-outline-info" asp-controller="StrudentApiCall" asp-action="Create"><i class="bi bi-plus"></i>Add New</a>
+    <br />
+    <br />
+    <table id="emptable" class="table table-bordered table-striped text-center table-dark">
+        <thead>
+            <tr>
+                <th>Student_Id</th>
+                <th>Name</th>
+                <th>Class</th>
+                <th>Mobile No</th>
+                <th>Address</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var data in Model)
+            {
+                <tr>
+                    <td>@data.studentId</td>
+                    <td>@data.studentName</td>
+                    <td>@data.studentClass</td>
+                    <td>@data.mobileNumber</td>
+                    <td>@data.studentAddress</td>
+                    <td>
+                        <a asp-action="Update" asp-route-id="@data.studentId"><i class="fa fa-pencil-square" style="color:yellow"></i></a><b>||</b><a asp-action="DeleteEmp" asp-route-id="@data.studentId" onclick="return confirm('You Want To Delete This Messege')"><i class="fa fa-trash"style="color:red"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

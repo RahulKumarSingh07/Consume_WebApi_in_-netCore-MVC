@@ -20,5 +20,7 @@ namespace First.API.Models
         public string studentAddress { get; set; }
         [Required]
         public string mobileNumber { get; set; }
+
+
     }
 }
